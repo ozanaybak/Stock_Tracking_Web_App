@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="62d1f8dacf01417bb318731c35150ea7" Name="Diagram1">
+        <EntityTypeShape EntityType="StockModel.ALT_DEPO" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockModel.DEPO" Width="1.5" PointX="5.25" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockModel.DEPO_ESLESTIRME" Width="1.5" PointX="7.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockModel.HAREKET_TIP" Width="1.5" PointX="11.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockModel.KULLANICI" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockModel.KULLANICI_TIP" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockModel.OLCU_BIRIMI" Width="1.5" PointX="6" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockModel.SORUMLU" Width="1.5" PointX="5.25" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockModel.STOK" Width="1.5" PointX="8.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockModel.STOK_DURUM" Width="1.5" PointX="10.5" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockModel.STOK_HAREKET" Width="1.5" PointX="13.5" PointY="11.75" IsExpanded="true" />
+        <AssociationConnector Association="StockModel.FK_ALT_DEPO__ALT_DEPO_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="StockModel.FK_ALT_DEPO_KULLANICI_GUNCELLEYEN" ManuallyRouted="false" />
+        <AssociationConnector Association="StockModel.FK_ALT_DEPO_KULLANICI_OLUSTURAN" ManuallyRouted="false" />
+        <AssociationConnector Association="StockModel.FK_DEPO__DEPO_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="StockModel.FK_DEPO_KULLANICI_GUNCELLEYEN" ManuallyRouted="false" />
+        <AssociationConnector Association="StockModel.FK_DEPO_KULLANICI_OLUSTURAN" ManuallyRouted="false" />
+        <AssociationConnector Association="StockModel.FK_DEPO_ESLESTIRME_DEPO_ESLESTIRME_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="StockModel.FK_DEPO_ESLESTIRME_DEPO_ESLESTIRME_ID_" ManuallyRouted="false" />
+        <AssociationConnector Association="StockModel.FK_KULLANICI_DEPO_ESLESTIRME_GUNCELLEYEN" ManuallyRouted="false" />
+        <AssociationConnector Association="StockModel.FK_KULLANICI_DEPO_ESLESTIRME_OLUSTURAN" ManuallyRouted="false" />
+        <AssociationConnector Association="StockModel.FK_HAREKET_TIP_HAREKET_TIP_ID_" ManuallyRouted="false" />
+        <AssociationConnector Association="StockModel.FK_KULLANICI_STOK_DURUM_GUNCELLEYEN" ManuallyRouted="false" />
+        <AssociationConnector Association="StockModel.FK_KULLANICI_STOK_DURUM_OLUSTURAN" ManuallyRouted="false" />
+        <AssociationConnector Association="StockModel.FK_KULLANICI_TIP_KULTIP_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="StockModel.FK_SORUMLU_KULLANICI_GUNCELLEYEN" ManuallyRouted="false" />
+        <AssociationConnector Association="StockModel.FK_SORUMLU_KULLANICI_OLUSTURAN" ManuallyRouted="false" />
+        <AssociationConnector Association="StockModel.FK_STOK_HAREKET_GUNCELLEYEN" ManuallyRouted="false" />
+        <AssociationConnector Association="StockModel.FK_STOK_HAREKET_OLUSTURAN" ManuallyRouted="false" />
+        <AssociationConnector Association="StockModel.FK_STOK_KULLANICI_GUNCELLEYEN" ManuallyRouted="false" />
+        <AssociationConnector Association="StockModel.FK_STOK_KULLANICI_OLUSTURAN" ManuallyRouted="false" />
+        <AssociationConnector Association="StockModel.FK_OLCU_BIRIMI_OLCUBIRIM_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="StockModel.FK_SORUMLU_SORUMLU_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="StockModel.FK_STOK_STOK_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="StockModel.FK_STOK_STOK_ID_" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,102 @@
+﻿@model IEnumerable<stockProject.Models.KULLANICI>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPageMain.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">@ViewBag.SayfaAdi</h3>
+    </div>
+</div>
+<hr />
+
+<p>
+    @Html.ActionLink("Ekle", "Create", null, new { @class = "btn btn-success btn-rounded" })
+</p>
+
+
+<div class="card ">
+    <h5 class="card-header h5 primary-color">@ViewBag.CardAdi</h5>
+    <div class="card-body">
+
+        <table width="100%" class="table table-striped table-bordered table-hover" id="tbl_datatable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.KUL_USERNAME)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.KUL_AD)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.KUL_SOYAD)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.KUL_TIP)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.STATU)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OLUSTURAN_KULLANICI)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OLUSTURMA_TARIHI)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.GUNCELLEYEN_KULLANICI)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.GUNCELLEME_TARIHI)
+                    </th>
+                    <th width="14%"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.KUL_USERNAME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.KUL_AD)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.KUL_SOYAD)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.KULLANICI_TIP.KULTIP_ADI)
+
+                        </td>
+                        <td>
+                            @(item.STATU ? "Aktif":"Pasif")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OLUSTURAN_KULLANICI)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OLUSTURMA_TARIHI)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GUNCELLEYEN_KULLANICI)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GUNCELLEME_TARIHI)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Edit", new { id = item.KULLANICI_ID })" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                            <a href="@Url.Action("Delete", new { id = item.KULLANICI_ID })" class="btn btn-sm btn-danger" onclick="return confirm('Silmek istediğinize emin misiniz?');"><i class="far fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

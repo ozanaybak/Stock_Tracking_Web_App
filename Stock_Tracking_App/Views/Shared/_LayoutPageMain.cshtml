@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>@ViewBag.SekmeAdi</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
+
+    <link rel="shortcut icon" href="~/Image/Logo.png" type="image/x-icon">
+
+    @Styles.Render("~/bundles/mainStyle")
+
+    @Styles.Render("~/bundles/datatableCss")
+
+    <!-- Your custom styles (optional) -->
+    <style>
+        .counter {
+            background-color: #f5f5f5;
+            padding: 20px 0;
+            border-radius: 5px;
+            color: blue
+        }
+
+        .md-form.md-outline label {
+            left: 8px;
+            padding-right: 5px;
+            padding-left: 5px;
+            font-weight: 500;
+            background: #fff;
+            transform: translateY(-13px) scale(.8)
+        }
+
+        .side-nav .subheader {
+            border-top: 1px solid rgba(153,153,153,.3);
+            /*border-bottom: 1px solid rgba(153,153,153,.3);*/
+            pointer-events: none;
+            color: #9e9e9e;
+            font-size: 28px;
+            /*          font-weight: 800;*/
+            /*background-color: aqua;*/
+        }
+
+        .card-header {
+            color: white;
+        }
+
+        .collapsible-body a.waves-effect {
+            margin-left: -20px;
+        }
+
+        hr {
+            margin-top: 0px;
+            margin-bottom: 3px;
+        }
+
+        .div.dt-buttons {
+            float: left;
+        }
+
+        .dataTables_wrapper .dataTables_filter {
+            float: right;
+            text-align: right;
+        }
+
+        #footer {
+            position: fixed;
+            padding: 10px 10px 0px 10px;
+            bottom: 0;
+            width: 100%;
+            /* Height of the footer*/
+            height: 40px;
+            background: grey;
+        }
+    </style>
+</head>
+
+<body class="fixed-sn white-skin">
+
+    <!--Main Navigation-->
+    <header>
+        <!-- Sidebar navigation -->
+        <div id="slide-out" class="side-nav sn-bg-6 fixed">
+            <ul class="custom-scrollbar">
+                <!-- Logo -->
+                <li class="logo-sn waves-effect py-3">
+                    <div class="text-center">
+                        <a href="@Url.Action("Index", "Home")" class="pl-0"><img src="~/Image/logo.png"></a>
+                    </div>
+                </li>
+                <!-- Logo -->
+                <!-- Side navigation links -->
+                <li>
+                    <ul class="collapsible collapsible-accordion">
+                        <li class="subheader"></li>
+                        @if (Session["KUL_TIP"].ToString() == "1")
+                        {
+                            <li>
+
+                                <a class="collapsible-header waves-effect arrow-r">
+                                    <i class="fas fa-solid fa-bookmark"></i>
+                                    Panels
+                                    <i class="fas fa-angle-down rotate-icon"></i>
+                                </a>
+                                <div class="collapsible-body">
+                                    <ul>
+                                        <li>
+                                            <a href="@Url.Action("Index", "HOME")" class="waves-effect"><i class="fas fa-solid fa-house"></i>HomePage</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Index", "User")" class="waves-effect"><i class="fas fa-solid fa-user"></i>User Management</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Index", "DEPO")" class="waves-effect"><i class="fas fa-warehouse"></i>Store Management</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Index", "SubStore")" class="waves-effect"><i class="fas fa-warehouse"></i>SubStore Management</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Index", "StoreSubStoreMatching")" class="waves-effect"><i class="fas fa-warehouse"></i>Store/SubStore Management</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Index", "StockManagement")" class="waves-effect"><i class="fas fa-solid fa-clipboard"></i>Stock Management</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Index", "Sorumlu")" class="waves-effect"><i class="fas fa-solid fa-clipboard"></i>Sorumlu</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        }
+                        @if (Session["KUL_TIP"].ToString() == "2")
+                        {
+                            <li>
+                                <a href="@Url.Action("HareketEkle", "STOKHAREKET")" class="waves-effect"><i class="fas fa-solid fa-cubes"></i>Add Stock Transfer</a>
+                            </li>
+                        }
+                        @if (Session["KUL_TIP"].ToString() == "3")
+                        {
+                            <li>
+                                <a href="@Url.Action("StokHareketRapor", "Rapor")" class="waves-effect"><i class="fas fa-solid fa-file-circle-check"></i>See Reports</a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+                <!-- Side navigation links -->
+            </ul>
+            <div class="sidenav-bg mask-strong"></div>
+        </div>
+        <!-- Sidebar navigation -->
+        <!-- Navbar -->
+        <nav class="navbar fixed-top navbar-expand-lg scrolling-navbar double-nav">
+            <!-- SideNav slide-out button -->
+            <div class="float-left">
+                <a href="#" data-activates="slide-out" class="button-collapse black-text"><i class="fas fa-bars"></i></a>
+            </div>
+            <!-- Breadcrumb-->
+            <div class="breadcrumb-dn mr-auto">
+                <h5 class="ml-4 mb-0 font-weight-bold" style="color:#000F9F; ">StockTrackingApp</h5>
+            </div>
+
+
+            <ul class="nav navbar-nav nav-flex-icons ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle waves-effect" href="#" id="userDropdown" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user"></i> <span class="clearfix d-none d-sm-inline-block">@Session["KUL_AD"].ToString()</span>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        @*<a class="dropdown-item" href="login/Logout">Log Out</a>*@
+                        @Html.ActionLink("Log Out", "LogOut", "Login", null, new { @class = "dropdown-item" })
+                    </div>
+                </li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container-fluid">
+            @RenderBody()
+        </div>
+    </main>
+
+    @Scripts.Render("~/bundles/mainScript")
+
+    @Scripts.Render("~/bundles/datatableScript")
+
+
+    @RenderSection("scripts", required: false)
+
+    <script>
+        // SideNav Initialization
+        $(".button-collapse").sideNav();
+
+        var container = document.querySelector('.custom-scrollbar');
+        var ps = new PerfectScrollbar(container, {
+            wheelSpeed: 2,
+            wheelPropagation: true,
+            minScrollbarLength: 20
+        });
+
+
+        // Datatable
+        $(document).ready(function () {
+            $('#tbl_datatable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    //'copyHtml5',
+                    //'csvHtml5',
+                    'excelHtml5'
+                    //'pdfHtml5'
+                ],
+                responsive: true,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Turkish.json"
+                }, "columnDefs": [
+                    {
+                        type: 'turkish',
+                        targets: '_all'
+                    }
+                ]
+            });
+        });
+
+        // Datatable
+        $(document).ready(function () {
+            $('#tbl_datatable_server_side').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    //'copyHtml5',
+                    //'csvHtml5',
+                    //'excelHtml5'
+                    //'pdfHtml5'
+                ],
+                responsive: true,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Turkish.json"
+                }, "columnDefs": [
+                    {
+                        type: 'turkish',
+                        targets: '_all'
+                    }
+                ]
+            });
+        });
+
+        // Datatable
+        $(document).ready(function () {
+            $('#tbl_datatable_excel_columns').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: 'Excel',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,12],
+                            format: {
+                                body: function (data, row, column, node) {
+                                    return reformatNumber(data, row, column, node);
+                                }
+
+                            }
+                        },
+                        customize: function (xlsx) {
+                            addCustomNumberFormat(xlsx, '#,##0.##');
+                            //formatTargetColumn(xlsx, 'J'); // Excel column H
+                        }
+                    }
+                ],
+                responsive: true,
+                order: [[0, 'desc']],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Turkish.json"
+                }, "columnDefs": [
+                    {
+                        type: 'turkish',
+                        targets: '_all'
+                    }
+                ]
+            });
+        });
+
+        // Datatable
+        $(document).ready(function () {
+            $('#tbl_datatable_no_search').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    //'copyHtml5',
+                    //'csvHtml5',
+                    'excelHtml5'
+                    //'pdfHtml5'
+                ],
+                responsive: true,
+                searching: false,
+                paging: false,
+                info: false,
+                ordering : false,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Turkish.json"
+                }, "columnDefs": [
+                    {
+                        type: 'turkish',
+                        targets: '_all'
+                    }
+                ]
+            });
+        });
+
+        // Datatable
+        $(document).ready(function () {
+            $('#tbl_datatable_no_search2').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    //'copyHtml5',
+                    //'csvHtml5',
+                    'excelHtml5'
+                    //'pdfHtml5'
+                ],
+                responsive: true,
+                searching: false,
+                paging: false,
+                info: false,
+                ordering: false,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Turkish.json"
+                }, "columnDefs": [
+                    {
+                        type: 'turkish',
+                        targets: '_all'
+                    }
+                ]
+            });
+        });
+
+        // Datatable
+        $(document).ready(function () {
+            $('#tbl_datatable_no_search3').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    //'copyHtml5',
+                    //'csvHtml5',
+                    'excelHtml5'
+                    //'pdfHtml5'
+                ],
+                responsive: true,
+                searching: false,
+                paging: false,
+                info: false,
+                ordering: false,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Turkish.json"
+                }, "columnDefs": [
+                    {
+                        type: 'turkish',
+                        targets: '_all'
+                    }
+                ]
+            });
+        });
+
+
+
+
+        // Datatable with no order
+        $(document).ready(function () {
+            $('#tbl_datatable_no_order').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    //'copyHtml5',
+                    //'csvHtml5',
+                    'excelHtml5'
+                    //'pdfHtml5'
+                ],
+                destroy: true,
+                responsive: true,
+                "ordering": false,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Turkish.json"
+                }, "columnDefs": [
+                    {
+                        type: 'turkish',
+                        targets: '_all'
+                    }
+                ]
+            });
+        });
+
+        // Datatable with no order
+        $(document).ready(function () {
+            $('#tbl_datatable_no_order2').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    //'copyHtml5',
+                    //'csvHtml5',
+                    'excelHtml5'
+                    //'pdfHtml5'
+                ],
+                destroy: true,
+                responsive: true,
+                "ordering": false,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Turkish.json"
+                }, "columnDefs": [
+                    {
+                        type: 'turkish',
+                        targets: '_all'
+                    }
+                ]
+            });
+        });
+
+        $(function () {
+            @Html.Raw(TempData["msg"])
+        })
+
+
+        $(document).ready(function () {
+            $('.mdb-select').materialSelect();
+        });
+
+        $('input[name="STATU"][type="hidden"').remove();
+        $('input[name="KESILDI_BILGISI"][type="hidden"').remove();
+        $('input[name="BEYAZYAKA_MI"][type="hidden"').remove();
+
+        function phoneMask() {
+            var num = $(this).val().replace(/\D/g, '');
+            $(this).val(num.substring(0, 1) + '(' + num.substring(1, 4) + ')' + num.substring(4, 7) + '-' + num.substring(7, 11));
+        }
+
+        $('[type="tel"]').keyup(phoneMask);
+
+        $('input[disabled = "disabled"]').css('background-color', '#f2f2f2');
+
+        function reformatNumber(data, row, column, node) {
+            // replace spaces with nothing; replace commas with points.
+            if (column === 10 || column === 11) {
+                var newDataTemp = data.replace(',', '.').replaceAll(' ', '');
+                var newDataTemp1 = newDataTemp.replace('.00', '').replaceAll(' ', '');
+                var newData = "₺" + newDataTemp1;
+                return newData;
+            } else {
+                return data;
+            }
+        }
+
+        function addCustomNumberFormat(xlsx, numberFormat) {
+            // this adds a new custom number format to the Excel "styles" document:
+            var numFmtsElement = xlsx.xl['styles.xml'].getElementsByTagName('numFmts')[0];
+            // assume 6 custom number formats already exist, and next available ID is 176:
+            var numFmtElement = '<numFmt numFmtId="176" formatCode="' + numberFormat + '"/>';
+            $(numFmtsElement).append(numFmtElement);
+            $(numFmtsElement).attr("count", "7"); // increment the count
+
+            // now add a new "cellXfs" cell formatter, which uses our new number format (numFmt 176):
+            var celXfsElement = xlsx.xl['styles.xml'].getElementsByTagName('cellXfs');
+            var cellStyle = '<xf numFmtId="176" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"'
+                + ' applyFont="1" applyFill="1" applyBorder="1"/>';
+            // this will be the 8th "xf" element - and will therefore have an index of "7", when we use it later:
+            $(celXfsElement).append(cellStyle);
+            $(celXfsElement).attr("count", "69"); // increment the count
+        }
+
+        function formatTargetColumn(xlsx, col) {
+            var sheet = xlsx.xl.worksheets['sheet1.xml'];
+            // select all the cells whose addresses start with the letter prvoided
+            // in 'col', and add a style (s) attribute for style number 68:
+            $('row c[r^="' + col + '"]', sheet).attr('s', '68');
+        }
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+﻿@model  stockProject.Models.LogIn
+
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    ViewBag.SekmeAdi = "Giriş";
+    ViewBag.SayfaAdi = "Giriş";
+    ViewBag.CardAdi = "Giriş";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-header blue-gradient">
+        <h2 class="h2-responsive mb-0 flex-center"><img src="~/Image/logo.png"></h2>
+    </div>
+
+
+    <div class="form-group">
+        <div class="md-form">
+            <i class="fas fa-user prefix"></i>
+            @Html.LabelFor(model => model.USERNAME, htmlAttributes: new { @class = "active" })
+            @Html.EditorFor(model => model.USERNAME, new { htmlAttributes = new { @class = "form-control", @placeholder = " " } })
+            @Html.ValidationMessageFor(model => model.USERNAME, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="md-form">
+            <i class="fas fa-lock prefix"></i>
+            @Html.LabelFor(model => model.PASSWORD, htmlAttributes: new { @class = "active" })
+            @Html.EditorFor(model => model.PASSWORD, new { htmlAttributes = new { @class = "form-control", @type = "password", @placeholder = " " } })
+            @Html.ValidationMessageFor(model => model.PASSWORD, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="text-center">
+        <input type="submit" value="GİRİŞ YAP" class="btn success-color btn-rounded" />
+    </div>
+}
+

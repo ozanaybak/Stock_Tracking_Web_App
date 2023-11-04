@@ -1,0 +1,62 @@
+﻿@model stockProject.Models.ALT_DEPO
+
+@{
+    Layout = "~/Views/Shared/_LayoutPageMain.cshtml";
+    ViewBag.SekmeAdi = "Ceza Ana Bilgileri Güncelleme";
+    ViewBag.SayfaAdi = "Ceza Ana Bilgileri Güncelleme";
+    ViewBag.CardAdi = "Ceza Ana Bilgileri";
+}
+
+<h2>@ViewBag.SayfaAdi</h2>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    @Html.HiddenFor(model => model.ALT_DEPO_ID)
+    @Html.HiddenFor(model => model.OLUSTURAN_KULLANICI)
+    @Html.HiddenFor(model => model.OLUSTURMA_TARIHI)
+
+    <div class="card ">
+        <h5 class="card-header h5 red primary-color">@ViewBag.CardAdi</h5>
+        <div class="card-body">
+            <div class="form-horizontal">
+                <div class="col-lg-6">
+
+                    <div class="form-group">
+                        <div class="md-form md-outline">
+                            @Html.LabelFor(model => model.ALT_DEPO_ADI, htmlAttributes: new { @class = "" })
+                            @Html.EditorFor(model => model.ALT_DEPO_ADI, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ALT_DEPO_ADI, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="switch">
+                            <label>
+                                Pasif
+                                @Html.CheckBoxFor(model => model.STATU)
+                                <span class="lever"></span> Aktif
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.ActionLink("Vazgeç", "Index", null, new { @class = "btn btn-info btn-rounded" })
+                        <input type="submit" value="Kaydet" class="btn btn-success btn-rounded" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
